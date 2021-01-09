@@ -1,0 +1,25 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: springcloud-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: zuul9527.com
+    prefer-ip-address: true
+
+info:
+  app.name: lonely7yk-springcloud
+  company.name: blog.lonely7yk.com
+
+zuul:
+  routes:
+    mydept.serviceId: springcloud-provider-dept
+    mydept.path: /mydept/**
+  ignored-services: springcloud-provider-dept   # 不能再使用这个路径访问了，如果是 "*" 说明不能不所有吴福明访问（/mydept 是可以的）
+  prefix: /lonely7yk    # 表示域名前需要加这个前缀（如 localhost:9527/lonely7yk/mydept/dept/get/1）
